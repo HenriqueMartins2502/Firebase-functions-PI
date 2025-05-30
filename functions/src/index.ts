@@ -11,10 +11,10 @@ const db = admin.firestore();
 
 export const performAuth = onRequest(
   {
-    cors: true, // APENAS MANTENHA ESTA LINHA para habilitar CORS
+    cors: true, // linha para habilitar CORS
     region: "us-central1",
   },
-  async (request, response) => { // Aqui é onde o TypeScript espera void | Promise<void>
+  async (request, response) => { // Aqui é onde espera void | Promise<void>
     try {
       // Validar apiKey e partnerSite
       const { partnerSite, apiKey } = request.body;
@@ -43,7 +43,7 @@ export const performAuth = onRequest(
         return; // Garante que o caminho da função termine aqui e retorne void
       }
 
-      // --- Fim da Validação ---
+      //Fim da Validação
 
       // Gerar loginToken base64
       const token256Chars = crypto.randomBytes(128).toString('hex');
@@ -102,8 +102,8 @@ export const getLoginStatus = onRequest(
   },
   async (request, response) => {
     try {
-      // A requisição pode ser GET ou POST, mas para simplificar, vamos assumir POST com body.
-      // Se for GET, você pegaria o loginTokenId de request.query
+      // A requisição pode ser GET ou POST, mas para simplificar, vou assumir POST com body.
+
       const { loginTokenId } = request.body;
 
       if (!loginTokenId) {
@@ -128,7 +128,7 @@ export const getLoginStatus = onRequest(
           status: "approved",
           user: loginData.user, // Pode ser o ID do usuário, email, etc.
           loginTime: loginData.loginTime,
-          // Você pode incluir outros dados do loginTokenPayload se necessário
+          //incluir outros dados posteriormente
         });
         return;
       } else {
